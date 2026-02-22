@@ -1,7 +1,17 @@
+/*
+  ╔═══════════════════════════════════════════════════════════════════════╗
+  ║                                                                       ║
+  ║   Crafted with ❤️ by Sotiris Anastasiadis                             ║
+  ║   https://anast.dev | github.com/sotirisanastjm                       ║
+  ║   © 2026 - All Rights Reserved                                        ║
+  ║                                                                       ║
+  ╚═══════════════════════════════════════════════════════════════════════╝
+*/
+
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import Script from "next/script";
-import { ThemeProvider } from "@/components/providers";
+import { ThemeProvider, BrandingStamp } from "@/components/providers";
 import "./globals.css";
 
 const geistSans = localFont({
@@ -62,6 +72,7 @@ export default function RootLayout({
                     Skip to main content
                 </a>
                 <ThemeProvider>
+                    <BrandingStamp />
                     <div className="flex min-h-screen flex-col">
                         {children}
                     </div>
