@@ -17,7 +17,7 @@ export default function HomePage() {
                 aria-label="Enter tattoo gallery"
             >
                 <Image
-                    src="https://images.unsplash.com/photo-1611501275019-9b5cda994e8d?w=1200&q=80&fit=crop&auto=format"
+                    src="/tattoos/486598196_17848550805432519_5190940480037596429_n.jpg"
                     alt="Tattoo artistry"
                     fill
                     className="object-cover opacity-40 transition-all duration-700 group-hover:opacity-55 group-hover:scale-105"
@@ -47,7 +47,7 @@ export default function HomePage() {
                 aria-label="Enter art gallery"
             >
                 <Image
-                    src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=1200&q=80&fit=crop&auto=format"
+                    src="/gallery/616560482_18080652137237457_279688664147355281_n.jpg"
                     alt="Creative art gallery"
                     fill
                     className="object-cover opacity-40 transition-all duration-700 group-hover:opacity-55 group-hover:scale-105"

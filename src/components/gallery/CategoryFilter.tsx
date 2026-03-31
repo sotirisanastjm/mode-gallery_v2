@@ -26,99 +26,116 @@ export function CategoryFilter({
     const [activeCategory, setActiveCategory] = useState<Category | null>(null);
     const isTattoo = mode === "tattoo";
 
-    const displayedItems = activeCategory
-        ? itemsByCategory[activeCategory] || []
+    const availableCategories = categories.filter(
+        (cat) => (itemsByCategory[cat] || []).length > 0
+    );
+    const shouldShowFilter = availableCategories.length > 1;
+    const singleAvailableCategory =
+        availableCategories.length === 1 ? availableCategories[0] : null;
+    const resolvedActiveCategory =
+        activeCategory && availableCategories.includes(activeCategory)
+            ? activeCategory
+            : null;
+    const effectiveCategory =
+        resolvedActiveCategory ?? singleAvailableCategory ?? null;
+
+    const displayedItems = effectiveCategory
+        ? itemsByCategory[effectiveCategory] || []
         : allItems;
 
     const filterOptions = [
         { label: "All", category: null },
-        ...categories.map((cat) => ({
+        ...availableCategories.map((cat) => ({
             label: CATEGORY_LABELS[cat],
             category: cat,
         })),
     ];
 
     const getHeading = () => {
-        if (!activeCategory) {
+        if (!effectiveCategory) {
             return isTattoo ? "All Work" : "All Art Work";
         }
-        const label = CATEGORY_LABELS[activeCategory];
+        const label = CATEGORY_LABELS[effectiveCategory];
         return isTattoo ? `${label} Tattoos` : label;
     };
 
     return (
         <>
-            <nav className="py-6" aria-label={`${mode} categories`}>
-                <div
-                    className={clsx(
-                        "mb-5 h-px",
-                        isTattoo
-                            ? "bg-gradient-to-r from-ink-500 via-ink-700 to-transparent"
-                            : "bg-gradient-to-r from-art-400 via-art-300 to-transparent"
-                    )}
-                />
-
-                <div className="flex items-center gap-2">
-                    <span
-                        className={clsx(
-                            "mr-3 text-[10px] font-semibold uppercase tracking-[0.3em]",
-                            isTattoo ? "text-ink-400" : "text-art-500"
-                        )}
-                    >
-                        Filter
-                    </span>
-
+            {shouldShowFilter && (
+                <nav className="py-6" aria-label={`${mode} categories`}>
                     <div
                         className={clsx(
-                            "mr-3 h-4 w-px",
-                            isTattoo ? "bg-ink-600" : "bg-art-300"
+                            "mb-5 h-px",
+                            isTattoo
+                                ? "bg-gradient-to-r from-ink-500 via-ink-700 to-transparent"
+                                : "bg-gradient-to-r from-art-400 via-art-300 to-transparent"
                         )}
                     />
 
-                    <div className="flex flex-wrap gap-1.5">
-                        {filterOptions.map(({ label, category }) => {
-                            const isActive = activeCategory === category;
+                    <div className="flex items-center gap-2">
+                        <span
+                            className={clsx(
+                                "mr-3 text-[10px] font-semibold uppercase tracking-[0.3em]",
+                                isTattoo ? "text-ink-400" : "text-art-500"
+                            )}
+                        >
+                            Filter
+                        </span>
 
-                            return (
-                                <button
-                                    key={label}
-                                    onClick={() => setActiveCategory(category)}
-                                    className={clsx(
-                                        "relative px-4 py-1.5 text-xs font-medium uppercase tracking-widest transition-all duration-300",
-                                        isActive
-                                            ? isTattoo
-                                                ? "bg-ink-50 text-ink-900 shadow-[0_0_12px_rgba(245,245,245,0.15)]"
-                                                : "bg-art-900 text-art-50 shadow-[0_2px_10px_rgba(61,47,36,0.25)]"
-                                            : isTattoo
-                                                ? "text-ink-400 hover:text-ink-100 hover:bg-ink-800/60"
-                                                : "text-art-600 hover:text-art-900 hover:bg-art-200/60"
-                                    )}
-                                    aria-pressed={isActive}
-                                >
-                                    {label}
-                                    {isActive && (
-                                        <span
-                                            className={clsx(
-                                                "absolute bottom-0 left-1/2 h-0.5 w-3/5 -translate-x-1/2",
-                                                isTattoo ? "bg-ink-400" : "bg-art-400"
-                                            )}
-                                        />
-                                    )}
-                                </button>
-                            );
-                        })}
+                        <div
+                            className={clsx(
+                                "mr-3 h-4 w-px",
+                                isTattoo ? "bg-ink-600" : "bg-art-300"
+                            )}
+                        />
+
+                        <div className="flex flex-wrap gap-1.5">
+                            {filterOptions.map(({ label, category }) => {
+                                const isActive = resolvedActiveCategory === category;
+
+                                return (
+                                    <button
+                                        key={label}
+                                        onClick={() => setActiveCategory(category)}
+                                        className={clsx(
+                                            "relative px-4 py-1.5 text-xs font-medium uppercase tracking-widest transition-all duration-300",
+                                            isActive
+                                                ? isTattoo
+                                                    ? "bg-ink-50 text-ink-900 shadow-[0_0_12px_rgba(245,245,245,0.15)]"
+                                                    : "bg-art-900 text-art-50 shadow-[0_2px_10px_rgba(61,47,36,0.25)]"
+                                                : isTattoo
+                                                    ? "text-ink-400 hover:text-ink-100 hover:bg-ink-800/60"
+                                                    : "text-art-600 hover:text-art-900 hover:bg-art-200/60"
+                                        )}
+                                        aria-pressed={isActive}
+                                    >
+                                        {label}
+                                        {isActive && (
+                                            <span
+                                                className={clsx(
+                                                    "absolute bottom-0 left-1/2 h-0.5 w-3/5 -translate-x-1/2",
+                                                    isTattoo
+                                                        ? "bg-ink-400"
+                                                        : "bg-art-400"
+                                                )}
+                                            />
+                                        )}
+                                    </button>
+                                );
+                            })}
+                        </div>
                     </div>
-                </div>
 
-                <div
-                    className={clsx(
-                        "mt-5 h-px",
-                        isTattoo
-                            ? "bg-gradient-to-r from-transparent via-ink-700 to-ink-500"
-                            : "bg-gradient-to-r from-transparent via-art-300 to-art-400"
-                    )}
-                />
-            </nav>
+                    <div
+                        className={clsx(
+                            "mt-5 h-px",
+                            isTattoo
+                                ? "bg-gradient-to-r from-transparent via-ink-700 to-ink-500"
+                                : "bg-gradient-to-r from-transparent via-art-300 to-art-400"
+                        )}
+                    />
+                </nav>
+            )}
 
             <section aria-labelledby="gallery-heading">
                 <h2
@@ -135,8 +152,8 @@ export function CategoryFilter({
                 <GalleryGrid
                     items={displayedItems}
                     emptyMessage={
-                        activeCategory
-                            ? `No ${CATEGORY_LABELS[activeCategory].toLowerCase()} ${isTattoo ? "tattoos" : "art"} available yet.`
+                        effectiveCategory
+                            ? `No ${CATEGORY_LABELS[effectiveCategory].toLowerCase()} ${isTattoo ? "tattoos" : "art"} available yet.`
                             : `No ${isTattoo ? "tattoo" : "art"} work available yet. Check back soon!`
                     }
                 />

@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     ],
     authors: [{ name: "MODE²" }],
     icons: {
-        icon: "/favicon.ico",
+        icon: "/favicon.png",
     },
     openGraph: {
         type: "website",

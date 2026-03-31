@@ -2,9 +2,9 @@ import Link from "next/link";
 
 export default function NotFound() {
     return (
-        <main id="main-content" className="flex min-h-screen flex-col md:flex-row">
+        <main id="main-content" className="relative flex min-h-screen flex-col md:flex-row">
             {/* Dark/Ink Side - 4 */}
-            <div className="group relative flex flex-1 flex-col items-center justify-center overflow-hidden bg-ink-900 text-ink-50">
+            <div className="group relative flex flex-1 flex-col items-center justify-center overflow-hidden bg-ink-900 px-6 text-ink-50 md:items-end md:pr-16 lg:pr-24">
                 {/* Animated grain texture */}
                 <div className="pointer-events-none absolute inset-0 opacity-20">
                     <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg viewBox=%220 0 256 256%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noise%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.9%22 numOctaves=%224%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noise)%22/%3E%3C/svg%3E')]" />
@@ -22,7 +22,7 @@ export default function NotFound() {
                 {/* Bottom link */}
                 <Link
                     href="/tattoo"
-                    className="absolute bottom-12 z-10 rounded-full border border-ink-500 px-6 py-2 text-sm text-ink-300 transition-all hover:border-ink-300 hover:bg-ink-50 hover:text-ink-900"
+                    className="absolute bottom-8 z-10 rounded-full border border-ink-500 px-6 py-2 text-sm text-ink-300 transition-all hover:border-ink-300 hover:bg-ink-50 hover:text-ink-900 md:bottom-12"
                 >
                     Explore Tattoos →
                 </Link>
@@ -51,7 +51,7 @@ export default function NotFound() {
             </div>
 
             {/* Light/Art Side - 4 */}
-            <div className="group relative flex flex-1 flex-col items-center justify-center overflow-hidden bg-art-100 text-art-900">
+            <div className="group relative flex flex-1 flex-col items-center justify-center overflow-hidden bg-art-100 px-6 text-art-900 md:items-start md:pl-16 lg:pl-24">
                 {/* Subtle pattern overlay */}
                 <div className="pointer-events-none absolute inset-0 opacity-10">
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,_rgba(0,0,0,0.15)_1px,_transparent_0)] bg-[length:24px_24px]" />
@@ -69,28 +69,73 @@ export default function NotFound() {
                 {/* Bottom link */}
                 <Link
                     href="/art"
-                    className="absolute bottom-12 z-10 rounded-full border border-art-400 px-6 py-2 text-sm text-art-600 transition-all hover:border-art-600 hover:bg-art-900 hover:text-art-50"
+                    className="absolute bottom-8 z-10 rounded-full border border-art-400 px-6 py-2 text-sm text-art-600 transition-all hover:border-art-600 hover:bg-art-900 hover:text-art-50 md:bottom-12"
                 >
                     Explore Art →
                 </Link>
             </div>
 
             {/* Centered message overlay */}
-            <div className="pointer-events-none absolute inset-x-0 bottom-1/4 z-30 text-center">
-                <p className="text-xs font-light uppercase tracking-[0.4em] text-ink-400 mix-blend-difference md:text-sm">
-                    Lost in the gallery
+            <div className="pointer-events-none absolute inset-x-0 bottom-24 z-30 text-center md:bottom-32">
+                <p className="relative text-xs font-light uppercase tracking-[0.4em] md:text-sm">
+                    <span className="invisible">Lost in the gallery</span>
+                    <span
+                        aria-hidden="true"
+                        className="absolute inset-0 text-ink-200"
+                        style={{ clipPath: "inset(0 50% 0 0)" }}
+                    >
+                        Lost in the gallery
+                    </span>
+                    <span
+                        aria-hidden="true"
+                        className="absolute inset-0 text-art-700"
+                        style={{ clipPath: "inset(0 0 0 50%)" }}
+                    >
+                        Lost in the gallery
+                    </span>
                 </p>
-                <p className="mt-2 text-[10px] uppercase tracking-[0.2em] text-ink-500 mix-blend-difference">
-                    Pick a direction to find your way
+                <p className="relative mt-2 text-[10px] uppercase tracking-[0.2em]">
+                    <span className="invisible">Pick a direction to find your way</span>
+                    <span
+                        aria-hidden="true"
+                        className="absolute inset-0 text-ink-300"
+                        style={{ clipPath: "inset(0 50% 0 0)" }}
+                    >
+                        Pick a direction to find your way
+                    </span>
+                    <span
+                        aria-hidden="true"
+                        className="absolute inset-0 text-art-600"
+                        style={{ clipPath: "inset(0 0 0 50%)" }}
+                    >
+                        Pick a direction to find your way
+                    </span>
                 </p>
+                <div className="mx-auto mt-3 h-px w-36 bg-gradient-to-r from-transparent via-ink-300/70 to-transparent" />
             </div>
 
             {/* Home link at top */}
             <Link
                 href="/"
-                className="absolute left-1/2 top-8 z-30 -translate-x-1/2 text-xs font-light uppercase tracking-[0.3em] text-ink-400 mix-blend-difference transition-opacity hover:opacity-70"
+                className="absolute left-1/2 top-8 z-30 -translate-x-1/2 text-xs font-light uppercase tracking-[0.3em] transition-opacity hover:opacity-70"
             >
-                ← Back to MODE²
+                <span className="relative block">
+                    <span className="invisible">← Back to MODE²</span>
+                    <span
+                        aria-hidden="true"
+                        className="absolute inset-0 text-ink-200"
+                        style={{ clipPath: "inset(0 50% 0 0)" }}
+                    >
+                        ← Back to MODE²
+                    </span>
+                    <span
+                        aria-hidden="true"
+                        className="absolute inset-0 text-art-700"
+                        style={{ clipPath: "inset(0 0 0 50%)" }}
+                    >
+                        ← Back to MODE²
+                    </span>
+                </span>
             </Link>
         </main>
     );
