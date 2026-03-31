@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { GalleryGrid } from "@/components/gallery";
 import { CategoryNav } from "@/components/layout";
-import { getGalleryItems } from "@/lib/cms";
+import { getGalleryItems } from "@/lib/gallery-data";
 import { ART_CATEGORIES, CATEGORY_LABELS, type ArtCategory } from "@/types";
 
 export const dynamic = "force-dynamic";

@@ -36,20 +36,6 @@ export function getCloudinaryUrl(
     return `https://res.cloudinary.com/${cloudName}/image/upload/${transformString}/${publicId}`;
 }
 
-export function getImageDimensions(
-    aspectRatio: "square" | "portrait" | "landscape" = "square",
-    baseSize: number = 400
-): { width: number; height: number } {
-    switch (aspectRatio) {
-        case "portrait":
-            return { width: baseSize, height: Math.round(baseSize * 1.33) };
-        case "landscape":
-            return { width: baseSize, height: Math.round(baseSize * 0.75) };
-        default:
-            return { width: baseSize, height: baseSize };
-    }
-}
-
 export function getPlaceholderImage(
     width: number = 400,
     height: number = 400,

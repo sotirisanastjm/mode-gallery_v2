@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import { CategoryFilter } from "@/components/gallery";
 import { ArtHero } from "@/components/layout";
-import { getAllGalleryItemsByMode, getItemsByCategory } from "@/lib/cms";
+import {
+    getAllGalleryItemsByMode,
+    getItemsByCategory,
+} from "@/lib/gallery-data";
 import { ART_CATEGORIES } from "@/types";
 
 export const dynamic = "force-dynamic";

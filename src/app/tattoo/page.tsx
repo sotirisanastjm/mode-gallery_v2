@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { CategoryFilter } from "@/components/gallery";
-import { getAllGalleryItemsByMode, getItemsByCategory } from "@/lib/cms";
+import {
+    getAllGalleryItemsByMode,
+    getItemsByCategory,
+} from "@/lib/gallery-data";
 import { TATTOO_CATEGORIES } from "@/types";
 
 export const dynamic = "force-dynamic";

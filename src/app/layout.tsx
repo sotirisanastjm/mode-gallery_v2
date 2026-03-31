@@ -10,8 +10,6 @@
 
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import Script from "next/script";
-import { ThemeProvider, BrandingStamp } from "@/components/providers";
 import "./globals.css";
 
 const geistSans = localFont({
@@ -58,38 +56,14 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en" suppressHydrationWarning>
-            <head>
-                <Script
-                    src="https://identity.netlify.com/v1/netlify-identity-widget.js"
-                    strategy="lazyOnload"
-                />
-            </head>
+        <html lang="en">
             <body
                 className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}
             >
                 <a href="#main-content" className="skip-link">
                     Skip to main content
                 </a>
-                <ThemeProvider>
-                    <BrandingStamp />
-                    <div className="flex min-h-screen flex-col">
-                        {children}
-                    </div>
-                </ThemeProvider>
-                <Script id="netlify-identity-redirect" strategy="lazyOnload">
-                    {`
-                        if (window.netlifyIdentity) {
-                            window.netlifyIdentity.on("init", user => {
-                                if (!user) {
-                                    window.netlifyIdentity.on("login", () => {
-                                        document.location.href = "/admin/";
-                                    });
-                                }
-                            });
-                        }
-                    `}
-                </Script>
+                <div className="flex min-h-screen flex-col">{children}</div>
             </body>
         </html>
     );
